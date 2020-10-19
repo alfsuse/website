@@ -319,12 +319,19 @@ Executors](https://argoproj.github.io/argo/workflow-executors/) and reference
     ```
 
     The Kubeflow Pipelines deployment may take several minutes to complete.
+2. Verify that the Kubeflow Pipelines UI is accessible by port-forwarding:
 
-    **Note**: `kubectl apply -k` accepts local paths and paths that are
-    formatted as
-    [hashicorp/go-getter URLs](https://github.com/kubernetes-sigs/kustomize/blob/master/examples/remoteBuild.md#url-format).
-    While the paths in the preceding commands look like URLs, they are not valid
-    URLs.
+   ```SHELL
+   kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
+   ```
+
+Open the Kubeflow Pipelines UI at http://localhost:8080/ or if you are using Kind or K3s within a VM http://{VM IP ADDRESS}:8080/
+For K3ai this is not necessary since the installation process will output the right address automatically.
+
+**Note**: `kubectl apply -k` accepts local paths and paths that are
+formatted as [hashicorp/go-getter URLs](https://github.com/kubernetes-sigs/kustomize/blob/master/examples/remoteBuild.md#url-format).
+While the paths in the preceding commands look like URLs, they are not valid
+URLs.
 
 ## Uninstalling Kubeflow Pipelines
 
